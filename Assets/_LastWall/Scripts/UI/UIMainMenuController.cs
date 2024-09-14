@@ -31,6 +31,6 @@ public class UIMainMenuController : MonoBehaviour
 
     private void OnStartGameButtonClicked()
     {
-        Debug.Log("Start!");
+        SceneManager.Instance.LoadScene(SceneNames.GameScene);
     }
 }
