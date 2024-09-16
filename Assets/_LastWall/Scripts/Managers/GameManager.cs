@@ -41,4 +41,21 @@ public class GameManager : Manager<GameManager>
         Debug.Log(state);
     }
 
+    #region State Test Code
+    /*public void TestReady()
+    {
+        StateManager.Instance.ChangeState(GameState.Ready);
+    }
+
+    public void TestBattle()
+    {
+        StateManager.Instance.ChangeState(GameState.Battle);
+    }
+
+    public void TestnMaintance()
+    {
+        StateManager.Instance.ChangeState(GameState.Maintenance);
+    }*/
+    #endregion
+
 }
