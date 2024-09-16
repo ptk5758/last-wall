@@ -11,38 +11,50 @@ public class GameManager : Manager<GameManager>
 
     private void Start()
     {
-        // ½ºÅ×ÀÌÁö º¯°æ ÀÌº¥Æ® ±¸µ¶
-        StageManager.Event.StageEnterd += StageEnterd_EventHandler;
+        // ìŠ¤í…Œì´ì§€ ë³€ê²½ ì´ë²¤íŠ¸ êµ¬ë…
+        StageManager.Event.StageEntered += StageEnterd_EventHandler;
+        StageManager.Event.RoundEntered += (RoundData data) => { Debug.Log(data.test); };
 
-        // »óÅÂ º¯°æ ÀÌº¥Æ® ±¸µ¶
+        // ìƒíƒœ ë³€ê²½ ì´ë²¤íŠ¸ êµ¬ë…
         StateManager.Event.StateChanged += StateChanged_EventHandler;
     }
 
     private void OnDisable()
     {
-        // ½ºÅ×ÀÌÁö º¯°æ ÀÌº¥Æ® ±¸µ¶ ÇØÁ¦
-        StageManager.Event.StageEnterd -= StageEnterd_EventHandler;
+        // ìŠ¤í…Œì´ì§€ ë³€ê²½ ì´ë²¤íŠ¸ êµ¬ë… í•´ì œ
+        StageManager.Event.StageEntered -= StageEnterd_EventHandler;
 
-        // »óÅÂ º¯°æ ÀÌº¥Æ® ±¸µ¶ ÇØÁ¦
+        // ìƒíƒœ ë³€ê²½ ì´ë²¤íŠ¸ êµ¬ë… í•´ì œ
         StateManager.Event.StateChanged -= StateChanged_EventHandler;
     }
 
-    // ½ºÅ×ÀÌÁö º¯°æ ÀÌº¥Æ® Çîµé·¯
+    // ìŠ¤í…Œì´ì§€ ë³€ê²½ ì´ë²¤íŠ¸ í—¨ë“¤ëŸ¬
     private void StageEnterd_EventHandler(StageData stage)
     {
         /*Debug.Log("Stage Enterd...");
         Debug.Log(stage);*/
     }
 
-    // State º¯°æ ÀÌº¥Æ® Çîµé·¯
+    // State ë³€ê²½ ì´ë²¤íŠ¸ í—¨ë“¤ëŸ¬
     private void StateChanged_EventHandler(GameState state)
     {
-        Debug.Log("»óÅÂ º¯°æ");
-        Debug.Log(state);
+        switch (state)
+        {
+            case GameState.Battle:
+                StartBattle();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void StartBattle()
+    {
+        StageManager.Instance.StartRound();
     }
 
     #region State Test Code
-    /*public void TestReady()
+    public void TestReady()
     {
         StateManager.Instance.ChangeState(GameState.Ready);
     }
@@ -55,7 +67,7 @@ public class GameManager : Manager<GameManager>
     public void TestnMaintance()
     {
         StateManager.Instance.ChangeState(GameState.Maintenance);
-    }*/
+    }
     #endregion
 
 }

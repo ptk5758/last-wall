@@ -4,40 +4,53 @@ using UnityEngine;
 
 public interface IStageManager
 {
+    /// <summary>
+    /// Current Stage
+    /// </summary>
     public StageData Stage { get; }
+    public bool HasNextRound();
+    public void StartRound();
 }
+
+#region Stage Manager
 public class StageManager : Manager<StageManager>, IStageManager
 {
-    #region Event.OnStageEnterd() È£Ãâ ÇÒ °Í
-    public static class Event
+    #region Round
+    class Round
     {
-        public static event System.Action<StageData> StageEnterd;
-
-        public static void OnStageEnterdTrigger(StageData data)
+        Queue<RoundData> rounds;
+        public Round(StageData data)
         {
-            StageEnterd?.Invoke(data);
+            this.rounds = new Queue<RoundData>(data.rounds);
+        }
+        public RoundData Next()
+        {
+            if (rounds.Count == 0)
+            {
+                throw new System.Exception("No Next Round..");
+            }
+            return rounds.Dequeue();
+        }
+        public bool HasNextRound()
+        {
+            return rounds.Count > 0;
         }
     }
     #endregion
 
-    /// <summary>
-    /// Current Stage
-    /// ÇöÀç Stage Data¸¦ °¡Á®¿À´Â Method
-    /// </summary>
     public StageData Stage { get; private set; }
-
     [SerializeField]
     private StageData[] stages;
 
-    // Load Stage Datas
+    private Round round;
+
     protected override void Awake()
     {
         base.Awake();
 
-        // Stage Datas ¸¦ ÃÊ±âÈ­ ÇÏ´Â ·ÎÁ÷
-        // JSON.. µîÀ» ÀÌ¿ëÇØ¼­
-        // Test Stage Init
-        Stage = stages[0];
+        
+        Stage = stages[0]; // ì„ì‹œë¡œ Stages[0] ë°°ì—´ ë“¤ê³ ì˜¨ê±°ì„..
+        round = new Round(Stage);
     }
 
     private void Start()
@@ -47,4 +60,36 @@ public class StageManager : Manager<StageManager>, IStageManager
             StageManager.Event.OnStageEnterdTrigger(Stage);
         }
     }
+
+    public void StartRound()
+    {
+        Debug.Log("StartRound!");
+        Event.OnRoundEnterdTrigger(round.Next());
+    }
+
+    public bool HasNextRound() => round.HasNextRound();
+
+    #region Event Class
+    public static class Event
+    {
+        /// <summary>
+        ///  ìŠ¤í…Œì´ì§€ ë“¤ì–´ì™”ì„ë•Œ ì´ë²¤íŠ¸
+        /// </summary>
+        public static event System.Action<StageData> StageEntered;
+        public static void OnStageEnterdTrigger(StageData data)
+        {
+            StageEntered?.Invoke(data);
+        }
+
+        /// <summary>
+        /// Round ë“¤ì–´ì™”ì„ë•Œ ì´ë²¤íŠ¸
+        /// </summary>
+        public static event System.Action<RoundData> RoundEntered;
+        public static void OnRoundEnterdTrigger(RoundData data)
+        {
+            RoundEntered?.Invoke(data);
+        }
+    }
+    #endregion
 }
+#endregion
