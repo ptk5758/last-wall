@@ -22,7 +22,7 @@ public class Manager<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         if (transform.parent != null && transform.root != null)
         {
