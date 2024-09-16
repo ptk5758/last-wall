@@ -13,7 +13,7 @@ public class StageManager : Manager<StageManager>, IStageManager
     {
         public static event System.Action<StageData> StageEnterd;
 
-        public static void OnStageEnterd(StageData data)
+        public static void OnStageEnterdTrigger(StageData data)
         {
             StageEnterd?.Invoke(data);
         }
@@ -44,7 +44,7 @@ public class StageManager : Manager<StageManager>, IStageManager
     {
         if (Stage != null)
         {
-            StageManager.Event.OnStageEnterd(Stage);
+            StageManager.Event.OnStageEnterdTrigger(Stage);
         }
     }
 }
