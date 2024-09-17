@@ -13,7 +13,7 @@ public class GameManager : Manager<GameManager>
     {
         // 스테이지 변경 이벤트 구독
         StageManager.Event.StageEntered += StageEnterd_EventHandler;
-        StageManager.Event.RoundEntered += (RoundData data) => { Debug.Log(data.test); };
+        // StageManager.Event.RoundEntered += (RoundData data) => { Debug.Log(data); };
 
         // 상태 변경 이벤트 구독
         StateManager.Event.StateChanged += StateChanged_EventHandler;
