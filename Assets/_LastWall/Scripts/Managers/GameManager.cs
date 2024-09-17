@@ -11,28 +11,36 @@ public class GameManager : Manager<GameManager>
 
     private void Start()
     {
+        #region Event Subscribe
         // 스테이지 변경 이벤트 구독
         StageManager.Event.StageEntered += StageEnterd_EventHandler;
-        // StageManager.Event.RoundEntered += (RoundData data) => { Debug.Log(data); };
+
+        // 라운드 엔터 이벤트 구독
+        StageManager.Event.RoundEntered += RoundEntered_EventHandler;
 
         // 상태 변경 이벤트 구독
         StateManager.Event.StateChanged += StateChanged_EventHandler;
+        #endregion
     }
 
     private void OnDisable()
     {
+        #region Event UnSubscribe
         // 스테이지 변경 이벤트 구독 해제
         StageManager.Event.StageEntered -= StageEnterd_EventHandler;
 
+        // 라운드 엔터 이벤트 구독 해제
+        StageManager.Event.RoundEntered += RoundEntered_EventHandler;
+
         // 상태 변경 이벤트 구독 해제
         StateManager.Event.StateChanged -= StateChanged_EventHandler;
+        #endregion
     }
 
     // 스테이지 변경 이벤트 헨들러
     private void StageEnterd_EventHandler(StageData stage)
     {
-        /*Debug.Log("Stage Enterd...");
-        Debug.Log(stage);*/
+
     }
 
     // State 변경 이벤트 헨들러
@@ -51,6 +59,12 @@ public class GameManager : Manager<GameManager>
     private void StartBattle()
     {
         StageManager.Instance.StartRound();
+    }
+
+    private void RoundEntered_EventHandler(RoundData data)
+    {
+        IMonsterSpawnManager spawnManager = MonsterSpawnManager.Instance;
+        spawnManager.SpawnRound(data);
     }
 
     #region State Test Code
