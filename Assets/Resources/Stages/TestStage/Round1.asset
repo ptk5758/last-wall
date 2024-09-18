@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Round1
   m_EditorClassIdentifier: 
   waves:
-  - prefab: {fileID: 7074565268712560823, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
-    delay: 1
-  - prefab: {fileID: 7074565268712560823, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
+  - prefab: {fileID: 4227502380125517718, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
     delay: 2
-  - prefab: {fileID: 7074565268712560823, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
-    delay: 3
-  - prefab: {fileID: 7074565268712560823, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
-    delay: 4
-  - prefab: {fileID: 7074565268712560823, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
-    delay: 5
+  - prefab: {fileID: 4227502380125517718, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
+    delay: 2
+  - prefab: {fileID: 4227502380125517718, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
+    delay: 2
+  - prefab: {fileID: 4227502380125517718, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
+    delay: 2
+  - prefab: {fileID: 4227502380125517718, guid: 416498b6d9def1c45ad0076879bdac84, type: 3}
+    delay: 2

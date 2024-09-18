@@ -67,6 +67,11 @@ public class GameManager : Manager<GameManager>
         spawnManager.SpawnRound(data);
     }
 
+    private void Update()
+    {
+        
+    }
+
     #region State Test Code
     public void TestReady()
     {

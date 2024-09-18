@@ -4,13 +4,13 @@ using UnityEngine;
 
 public interface IMonsterSpawnManager
 {   
-    public void Spawn(GameObject prefab, float delay);
-    public void Spawn(GameObject prefab) => Spawn(prefab, 0f);
+    public void Spawn(Monster prefab, float delay);
+    public void Spawn(Monster prefab) => Spawn(prefab, 0f);
     public void SpawnRound(RoundData data);
 }
 public class MonsterSpawnManager : Manager<MonsterSpawnManager>, IMonsterSpawnManager
 {
-    public static HashSet<GameObject> spawned = new HashSet<GameObject>();
+    public static HashSet<Monster> spawned = new HashSet<Monster>();
 
     [SerializeField]
     private Transform spawnPoint;
@@ -24,12 +24,12 @@ public class MonsterSpawnManager : Manager<MonsterSpawnManager>, IMonsterSpawnMa
     {
         Event.MonsterSpawned -= MonsterSpawned_EventHandler;
     }
-    private void MonsterSpawned_EventHandler(GameObject gameObject)
+    private void MonsterSpawned_EventHandler(Monster monster)
     {
-        spawned.Add(gameObject);
+        spawned.Add(monster);
     }
 
-    public void Spawn(GameObject prefab, float delay)
+    public void Spawn(Monster prefab, float delay)
     {
         StartCoroutine(SpawnCoroutine(prefab, delay));
     }
@@ -49,17 +49,17 @@ public class MonsterSpawnManager : Manager<MonsterSpawnManager>, IMonsterSpawnMa
         }
     }
 
-    private IEnumerator SpawnCoroutine(GameObject prefab, float delay)
+    private IEnumerator SpawnCoroutine(Monster prefab, float delay)
     {   
-        GameObject gameObject = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-        Event.OnMonsterSpawnedTrigger(gameObject);
+        GameObject gameObject = Instantiate(prefab.gameObject, spawnPoint.position, spawnPoint.rotation);
+        Event.OnMonsterSpawnedTrigger(gameObject.GetComponent<Monster>());
         yield return new WaitForSeconds(delay);
     }
 
     public static class Event
     {
-        public static event System.Action<GameObject> MonsterSpawned;
-        public static void OnMonsterSpawnedTrigger(GameObject gameObject)
+        public static event System.Action<Monster> MonsterSpawned;
+        public static void OnMonsterSpawnedTrigger(Monster gameObject)
         {
             MonsterSpawned?.Invoke(gameObject);
         }

@@ -5,16 +5,16 @@ using UnityEngine;
 [System.Serializable]
 public struct Wave
 {
-    public GameObject prefab;
+    public Monster prefab;
     public float delay;
 
-    public Wave(GameObject prefab)
+    public Wave(Monster prefab)
     {
         this.prefab = prefab;
         this.delay = 0f;
     }
 
-    public Wave(GameObject prefab, float delay) : this(prefab)
+    public Wave(Monster prefab, float delay) : this(prefab)
     {
         this.delay = delay;
     }
