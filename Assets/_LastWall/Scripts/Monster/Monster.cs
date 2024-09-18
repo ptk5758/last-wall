@@ -4,20 +4,36 @@ using UnityEngine;
 
 public interface IMonster
 {
-
+    public float Health { get; }
+    public float Speed { get; }
+    public float Damage { get; }
+    public float Range { get; }
+    public float Delay { get; }
 }
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IMonster
 {
     [Header("Require")]
     [SerializeField]
     private MonsterData monsterData;
 
+    #region Attribute
     [Header("Attribute")]
-    public float health; // HP
-    public float speed; // 이동 속도
-    public float damage; // 공격력
-    public float range; // 공격 범위 콜리전에 적용할듯함
-    public float delay; // 공격 간격
+    [SerializeField]
+    private float health;
+    public float Health { get => health; set => health = value; }
+    [SerializeField]
+    private float speed;
+    public float Speed { get => speed; set => speed = value; }
+    [SerializeField]
+    private float damage;
+    public float Damage { get => damage; set => damage = value; }
+    [SerializeField]
+    private float range;
+    public float Range { get => range; set => range = value; }
+    [SerializeField]
+    private float delay;
+    public float Delay { get => delay; set => delay = value; }
+    #endregion
     private void Start()
     {
         
