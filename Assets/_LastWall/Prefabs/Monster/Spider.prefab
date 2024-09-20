@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2882321666185908881}
-  - component: {fileID: 4227502380125517718}
+  - component: {fileID: 8542486475002067683}
   m_Layer: 0
-  m_Name: Slime
+  m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4227502380125517718
+--- !u!114 &8542486475002067683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7074565268712560823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42dbdc9b21e1b3847ba263111381b3c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dcc18510edeb814da40dd6ab20b0950, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 11400000, guid: 5f822b27049d2ab46a467c72dfa5d290, type: 2}
+  monsterData: {fileID: 11400000, guid: a5e957ca82ee5e34c80ffea640510be8, type: 2}
+  health: 0
+  speed: 0
+  damage: 0
+  range: 0
+  delay: 0

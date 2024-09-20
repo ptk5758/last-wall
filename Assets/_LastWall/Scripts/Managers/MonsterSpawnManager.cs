@@ -17,12 +17,24 @@ public class MonsterSpawnManager : Manager<MonsterSpawnManager>, IMonsterSpawnMa
 
     private void Start()
     {
+        // 몬스터 스폰 이벤트 구독
         Event.MonsterSpawned += MonsterSpawned_EventHandler;
+
+        // 몬스터 사망 이벤트 구독
+        Monster.Event.MonsterDied += MonsterDied_EventHandler;
     }
 
     private void OnDisable()
     {
+        // 몬스터 스폰 이벤트 구독 해제
         Event.MonsterSpawned -= MonsterSpawned_EventHandler;
+
+        // 몬스터 사망 이벤트 구독 해제
+        Monster.Event.MonsterDied += MonsterDied_EventHandler;
+    }
+    private void MonsterDied_EventHandler(Monster monster)
+    {
+        Debug.Log("Monster Died Event" + monster);
     }
     private void MonsterSpawned_EventHandler(Monster monster)
     {

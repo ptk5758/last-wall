@@ -9,6 +9,7 @@ public interface IMonster
     public float Damage { get; }
     public float Range { get; }
     public float Delay { get; }
+    public void Hit(float damage);
 }
 public class Monster : MonoBehaviour, IMonster
 {
@@ -34,8 +35,37 @@ public class Monster : MonoBehaviour, IMonster
     private float delay;
     public float Delay { get => delay; set => delay = value; }
     #endregion
-    private void Start()
+
+    protected virtual void Awake()
     {
-        
+        Health = monsterData.health;
+        Speed = monsterData.speed;
+        Damage = monsterData.damage;
+        Range = monsterData.range;
+        Delay = monsterData.delay;
+    }
+
+    public virtual void Hit(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Die();
+        } 
+    }
+
+    private void Die()
+    {
+        Event.OnDiedTrigger(this);
+        gameObject.SetActive(false);
+    }
+
+    public static class Event
+    {
+        public static event System.Action<Monster> MonsterDied;
+        public static void OnDiedTrigger(Monster data)
+        {
+            MonsterDied?.Invoke(data);
+        }
     }
 }
